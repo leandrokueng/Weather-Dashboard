@@ -35,7 +35,7 @@ Ein modernes, schnelles Wetter-Dashboard im Browser: Ort suchen oder Standort ve
 
 ## Tech-Stack
 
-- **HTML / CSS / Vanilla JavaScript**
+- **HTML / CSS / JavaScript**
 - **Chart.js** via CDN
 - **Open-Meteo**
   - Geocoding API: `https://geocoding-api.open-meteo.com/v1/search`
