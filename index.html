@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wetter & Klima Dashboard</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#0b1220">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <div class="brand">
+        <div class="logo">☁️</div>
+        <div>
+          <div class="brand__title">Wetter & Klima</div>
+          <div class="brand__sub">Open-Meteo • Charts • Favoriten</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <form id="searchForm" class="search">
+          <input id="cityInput" type="text" placeholder="Ort eingeben (z. B. Baden, Zürich, Bern …)" autocomplete="off" />
+          <button type="submit" class="btn">Suchen</button>
+          <button id="geoBtn" type="button" class="btn btn--ghost">Standort</button>
+        </form>
+
+        <div class="toggles">
+          <button id="unitBtn" class="chip" type="button" title="Einheit umschalten">°C</button>
+          <button id="themeBtn" class="chip" type="button" title="Theme umschalten">🌙</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+   
+    <section class="hero card">
+      <div class="hero__left">
+        <div class="hero__headline">
+          <div class="hero__icon" id="heroIcon">⛅</div>
+          <div>
+            <div class="hero__place" id="heroPlace">–</div>
+            <div class="hero__meta">
+              <span class="badge" id="heroTz">–</span>
+              <span class="muted">•</span>
+              <span class="muted">Letztes Update:</span>
+              <span class="muted" id="heroUpdated">–</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__now">
+          <div class="now__temp" id="curTemp">–</div>
+          <div class="now__desc">
+            <div class="desc__main" id="curDesc">–</div>
+            <div class="desc__sub">
+              Gefühlt <span id="curFeels">–</span> • Wind <span id="curWind">–</span> • Regen <span id="curRain">–</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__actions">
+          <button id="favBtn" class="btn btn--accent" type="button">⭐ Zu Favoriten</button>
+          <button id="refreshBtn" class="btn btn--ghost" type="button">↻ Aktualisieren</button>
+          <div class="status" id="status"></div>
+        </div>
+      </div>
+
+      <div class="hero__right">
+        <div class="miniGrid">
+          <div class="mini">
+            <div class="mini__k">Luftfeuchte</div>
+            <div class="mini__v" id="kpiHum">–</div>
+          </div>
+          <div class="mini">
+            <div class="mini__k">Druck</div>
+            <div class="mini__v" id="kpiPress">–</div>
+          </div>
+          <div class="mini">
+            <div class="mini__k">Sicht</div>
+            <div class="mini__v" id="kpiVis">–</div>
+          </div>
+          <div class="mini">
+            <div class="mini__k">Bewölkung</div>
+            <div class="mini__v" id="kpiCloud">–</div>
+          </div>
+          <div class="mini">
+            <div class="mini__k">UV</div>
+            <div class="mini__v" id="kpiUv">–</div>
+          </div>
+          <div class="mini">
+            <div class="mini__k">Koordinaten</div>
+            <div class="mini__v" id="kpiCoords">–</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+ 
+    <section class="favorites card">
+      <div class="row">
+        <h2 class="h2">Favoriten</h2>
+        <div class="muted small">Tip: Klick auf einen Favoriten zum Laden</div>
+      </div>
+      <div id="favList" class="favList"></div>
+    </section>
+
+    
+    <section class="insights card">
+      <div class="row">
+        <h2 class="h2">Insights</h2>
+        <div class="muted small">Kurz-Hinweise aus den nächsten Stunden/Tagen</div>
+      </div>
+      <div id="insightsList" class="insightsList"></div>
+    </section>
+
+    
+    <section class="card">
+      <div class="row">
+        <h2 class="h2">7-Tage Vorhersage</h2>
+        <div class="muted small">Min/Max • Regen • Wind • Sonne</div>
+      </div>
+      <div class="tableWrap">
+        <table id="dailyTable">
+          <thead>
+            <tr>
+              <th>Tag</th>
+              <th>Min</th>
+              <th>Max</th>
+              <th>Regen</th>
+              <th>Wind</th>
+              <th>Sunrise</th>
+              <th>Sunset</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+ 
+    <section class="grid">
+      <section class="card full">
+        <div class="row">
+          <h2 class="h2">Temperatur (48h)</h2>
+          <div class="muted small">Linie</div>
+        </div>
+        <canvas id="tempChart" height="120"></canvas>
+      </section>
+
+      <section class="card full">
+        <div class="row">
+          <h2 class="h2">Regen (48h)</h2>
+          <div class="muted small">Balken</div>
+        </div>
+        <canvas id="rainChart" height="120"></canvas>
+      </section>
+
+      <section class="card full">
+        <div class="row">
+          <h2 class="h2">Wind (48h)</h2>
+          <div class="muted small">Linie</div>
+        </div>
+        <canvas id="windChart" height="120"></canvas>
+      </section>
+
+      <section class="card full">
+        <div class="row">
+          <h2 class="h2">Luftfeuchte (48h)</h2>
+          <div class="muted small">Linie</div>
+        </div>
+        <canvas id="humChart" height="120"></canvas>
+      </section>
+
+      <section class="card full">
+        <div class="row">
+          <h2 class="h2">Luftdruck (48h)</h2>
+          <div class="muted small">Linie</div>
+        </div>
+        <canvas id="pressChart" height="120"></canvas>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <small>
+        Daten: Open-Meteo • Charts: Chart.js • Favoriten: LocalStorage
+      </small>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
