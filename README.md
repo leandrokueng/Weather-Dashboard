@@ -6,6 +6,11 @@ Ein modernes, schnelles Wetter-Dashboard im Browser: Ort suchen oder Standort ve
 
 ---
 
+## Link zur Web-App
+
+Den Link zur Web-App finden sie hier: weatherdashboardlk.netlify.app
+Viel spass beim ausprobieren!
+
 ## Features
 
 - 🔎 **Ortssuche** (Geocoding) inkl. sinnvollem Default (Baden, Aargau) beim Start
