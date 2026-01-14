@@ -12,7 +12,7 @@ Ein modernes, schnelles Wetter-Dashboard im Browser: Ort suchen oder Standort ve
 
 - Viel spass beim ausprobieren!
 
-- In den untenstehenden Kapitel, sehen sie noch weitere Informationen zum Projekt
+- In den untenstehenden Kapitel, sehen sie noch weitere Informationen zum Projekt.
 
 ## Features
 
