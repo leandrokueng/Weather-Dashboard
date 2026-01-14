@@ -8,8 +8,11 @@ Ein modernes, schnelles Wetter-Dashboard im Browser: Ort suchen oder Standort ve
 
 ## Link zur Web-App
 
-Den Link zur Web-App finden sie hier: weatherdashboardlk.netlify.app
-Viel spass beim ausprobieren!
+- Den Link zur Web-App finden sie hier: https://weatherdashboardlk.netlify.app/
+
+- Viel spass beim ausprobieren!
+
+- In den untenstehenden Kapitel, sehen sie noch weitere Informationen zum Projekt
 
 ## Features
 
